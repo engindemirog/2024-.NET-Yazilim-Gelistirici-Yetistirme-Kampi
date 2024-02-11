@@ -1,4 +1,5 @@
-﻿using Intro.DataAccess.Concretes;
+﻿using Intro.DataAccess.Abstracts;
+using Intro.DataAccess.Concretes;
 using Intro.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,21 @@ namespace Intro.Business;
 
 public class CourseManager
 {
-    
+    //dependency injection
+    private readonly ICourseDal _courseDal;
+
+    public CourseManager(ICourseDal courseDal)
+    {
+        _courseDal = courseDal;
+    }
+
     public List<Course> GetAll()
     {
         // business rules
-        CourseDal courseDal = new CourseDal();
+       
 
-        return courseDal.GetAll();
+        return _courseDal.GetAll();
     }
+
+
 }
